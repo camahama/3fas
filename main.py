@@ -80,7 +80,7 @@ class Slider:
         # By AI agent Mima 2026-02-05 17:35:00: Render label with italic if is_italic is True
         if self.is_italic:
             # Pygame's SysFont doesn't support granular rich text. Apply italic to the whole label.
-            italic_font = pygame.font.SysFont(font.get_fontname(), font.get_height(), italic=True) 
+            italic_font = pygame.font.SysFont("Arial", font.get_height(), italic=True) # By AI agent Mima 2026-02-05 17:34:00 
             label_surf = italic_font.render(f"{self.label}: {int(self.val)} W", True, self.color)
         else:
             label_surf = font.render(f"{self.label}: {int(self.val)} W", True, self.color)
