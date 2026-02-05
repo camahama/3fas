@@ -77,9 +77,13 @@ class Slider:
         knob_x = self.rect.x + int(self.rect.width * ratio)
         pygame.draw.circle(surface, (200, 200, 200), (knob_x, self.rect.centery), knob_radius)
         
-        # By AI agent Mima 2026-02-05 17:45:00: Custom rendering for italic 'P', subscripts, and em-dashes
-        # Attempt to use a font with good Unicode support, or fallback to Arial.
-        display_font = pygame.font.SysFont("Arial", font.get_height())
+        # By AI agent Mima 2026-02-05 17:55:00: Custom rendering for italic 'P', subscripts, and em-dashes
+        # Attempt to use a font known for good Unicode support (DejaVu Sans), or fallback to Arial.
+        font_path = pygame.font.match_font('dejavusans') # By AI agent Mima 2026-02-05 17:55:00
+        if font_path: # By AI agent Mima 2026-02-05 17:55:00
+            display_font = pygame.font.Font(font_path, font.get_height()) # By AI agent Mima 2026-02-05 17:55:00
+        else: # By AI agent Mima 2026-02-05 17:55:00
+            display_font = pygame.font.SysFont("Arial", font.get_height()) # By AI agent Mima 2026-02-05 17:55:00
 
         parts = self.label.split(' ', 1) # Split label into 'P' and the rest
         if len(parts) > 1 and parts[0].startswith('P'):
