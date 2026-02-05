@@ -248,7 +248,8 @@ class ThreePhaseSim:
         surface.blit(title, (self.w // 2 + int(20 * self.scale), int(20 * self.scale)))
         col1_x = self.sliders_delta[0].rect.x
         col2_x = self.sliders_y[0].rect.x
-        head1 = self.font_small.render("Huvudspänning (\u0394)", True, (180, 180, 180))
+        DELTA = "\u0394"
+        head1 = self.font_small.render(f"Huvudspänning ({DELTA})", True, (180, 180, 180))
         head2 = self.font_small.render("Fasspänning (Y)", True, (180, 180, 180))
         surface.blit(head1, (col1_x, int(60 * self.scale)))
         surface.blit(head2, (col2_x, int(60 * self.scale)))
