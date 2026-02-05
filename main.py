@@ -412,7 +412,7 @@ class ThreePhaseSim:
             y_pos = offset_y - px_val
             if offset_y - height_scale <= y_pos <= offset_y + height_scale:
                 pygame.draw.line(surface, (80, 80, 80), (offset_x, y_pos), (offset_x + width, y_pos), 1)
-                txt_x = max(10, offset_x - int(45 * self.scale))
+                txt_x = max(10, offset_x - int(25 * self.scale)) # Moved closer to y-axis # By AI agent Mima 2026-02-05 19:28:00
                 lbl = self.font_small.render(f"{amp} A", True, (255, 255, 255)) # Right-adjusted with space before A # By AI agent Mima 2026-02-05 19:10:00
                 surface.blit(lbl, (txt_x - lbl.get_width(), y_pos - int(8 * self.scale))) # By AI agent Mima 2026-02-05 19:10:00
 
