@@ -140,16 +140,16 @@ class ThreePhaseSim:
         except Exception as e:
             print(f"Kunde inte ladda bild: {e}")
 
-        self.sliders_delta = [ # By AI agent Mima 2026-02-05 17:48:00
-            Slider((0, 3000), 0, "P12 (L1—L2)", COLOR_P12_LABEL, is_italic=True), # By AI agent Mima 2026-02-05 17:48:00
-            Slider((0, 3000), 0, "P23 (L2—L3)", COLOR_P23_LABEL, is_italic=True), # By AI agent Mima 2026-02-05 17:48:00
-            Slider((0, 3000), 0, "P31 (L3—L1)", COLOR_P31_LABEL, is_italic=True)  # By AI agent Mima 2026-02-05 17:48:00
+        self.sliders_delta = [ # By AI agent Mima 2026-02-05 19:20:00
+            Slider((0, 3000), 0, "P12 (L1—L2)", COLOR_P12_LABEL), # Removed is_italic=True # By AI agent Mima 2026-02-05 19:20:00
+            Slider((0, 3000), 0, "P23 (L2—L3)", COLOR_P23_LABEL), # Removed is_italic=True # By AI agent Mima 2026-02-05 19:20:00
+            Slider((0, 3000), 0, "P31 (L3—L1)", COLOR_P31_LABEL)  # Removed is_italic=True # By AI agent Mima 2026-02-05 19:20:00
         ]
         
-        self.sliders_y = [ # By AI agent Mima 2026-02-05 17:48:00
-            Slider((0, 2000), 0, "P1 (L1—N)", COLOR_L1, is_italic=True), # By AI agent Mima 2026-02-05 17:48:00
-            Slider((0, 2000), 0, "P2 (L2—N)", COLOR_L2, is_italic=True), # By AI agent Mima 2026-02-05 17:48:00
-            Slider((0, 2000), 0, "P3 (L3—N)", COLOR_L3, is_italic=True)  # By AI agent Mima 2026-02-05 17:48:00
+        self.sliders_y = [ # By AI agent Mima 2026-02-05 19:20:00
+            Slider((0, 2000), 0, "P1 (L1—N)", COLOR_L1), # Removed is_italic=True # By AI agent Mima 2026-02-05 19:20:00
+            Slider((0, 2000), 0, "P2 (L2—N)", COLOR_L2), # Removed is_italic=True # By AI agent Mima 2026-02-05 19:20:00
+            Slider((0, 2000), 0, "P3 (L3—N)", COLOR_L3)  # Removed is_italic=True # By AI agent Mima 2026-02-05 19:20:00
         ]
         
         self.reset_rect = pygame.Rect(0, 0, 100, 40)
