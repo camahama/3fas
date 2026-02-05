@@ -169,9 +169,9 @@ class ThreePhaseSim:
         self.pixels_per_amp = BASE_PIXELS_PER_AMP * self.scale
         
         main_font_size = max(12, int(18 * self.scale))
-        small_font_size = max(10, int(20 * self.scale))
+        small_font_size = max(10, int(25 * self.scale)) # By AI agent Mima 2026-02-05 19:05:00
         self.font_main = pygame.font.SysFont("Arial", main_font_size)
-        self.font_small = pygame.font.Font(None, small_font_size)
+        self.font_small = pygame.font.SysFont("Arial", small_font_size, italic=True) # By AI agent Mima 2026-02-05 19:05:00
         
         if self.img_loaded:
             target_w = w // 2 - int(50 * self.scale)
@@ -185,7 +185,7 @@ class ThreePhaseSim:
         area_width = w // 2 - int(40 * self.scale)
         col_width = (area_width - int(40 * self.scale)) // 2
         slider_h = int(10 * self.scale)
-        slider_start_y = int(100 * self.scale)
+        slider_start_y = int(120 * self.scale) # By AI agent Mima 2026-02-05 19:05:00
         gap = int(80 * self.scale)
         
         x_col1 = area_start_x
