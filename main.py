@@ -39,12 +39,11 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 class Slider:
-    def __init__(self, val_range, initial_val, label, color, is_italic=False): # By AI agent Mima 2026-02-05 17:35:00
+    def __init__(self, val_range, initial_val, label, color): # Removed is_italic parameter # By AI agent Mima 2026-02-05 19:15:00
         self.min_val, self.max_val = val_range
         self.val = initial_val
         self.label = label
         self.color = color
-        self.is_italic = is_italic # By AI agent Mima 2026-02-05 17:35:00
         self.dragging = False
         self.rect = pygame.Rect(0, 0, 10, 10)
 
@@ -169,9 +168,12 @@ class ThreePhaseSim:
         self.pixels_per_amp = BASE_PIXELS_PER_AMP * self.scale
         
         main_font_size = max(12, int(18 * self.scale))
-        small_font_size = max(10, int(25 * self.scale)) # By AI agent Mima 2026-02-05 19:05:00
+        small_font_size = max(10, int(20 * self.scale)) # Reverted to original size for small font # By AI agent Mima 2026-02-05 19:07:00
+        heading_font_size = max(12, int(25 * self.scale)) # New font size for headings # By AI agent Mima 2026-02-05 19:07:00
+
         self.font_main = pygame.font.SysFont("Arial", main_font_size)
-        self.font_small = pygame.font.SysFont("Arial", small_font_size, italic=True) # By AI agent Mima 2026-02-05 19:05:00
+        self.font_small = pygame.font.SysFont("Arial", small_font_size) # Removed italic, will handle for specific text # By AI agent Mima 2026-02-05 19:07:00
+        self.font_heading = pygame.font.SysFont("Arial", heading_font_size, italic=True) # New font for headings, italic # By AI agent Mima 2026-02-05 19:07:00
         
         if self.img_loaded:
             target_w = w // 2 - int(50 * self.scale)
@@ -290,8 +292,8 @@ class ThreePhaseSim:
         col1_x = self.sliders_delta[0].rect.x
         col2_x = self.sliders_y[0].rect.x
         DELTA = "\u0394"
-        head1 = self.font_small.render(f"Huvudspänning ({DELTA})", True, (180, 180, 180))
-        head2 = self.font_small.render("Fasspänning (Y)", True, (180, 180, 180))
+        head1 = self.font_heading.render(f"Huvudspänning ({DELTA})", True, (180, 180, 180)) # Use new heading font # By AI agent Mima 2026-02-05 19:10:00
+        head2 = self.font_heading.render("Fasspänning (Y)", True, (180, 180, 180)) # Use new heading font # By AI agent Mima 2026-02-05 19:10:00
         surface.blit(head1, (col1_x, int(60 * self.scale)))
         surface.blit(head2, (col2_x, int(60 * self.scale)))
         for s in self.sliders_delta: s.draw(surface, self.font_main)
