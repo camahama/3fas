@@ -21,7 +21,7 @@ COLOR_N  = (255, 255, 255) # Vit
 # Fysikparametrar
 VOLTAGE_RMS = 230.0
 INITIAL_FREQ = 0.02
-MAX_FREQ = 0.1
+MAX_FREQ = 0.005
 BASE_PIXELS_PER_AMP = 10.0 
 
 def resource_path(relative_path):
@@ -244,11 +244,11 @@ class ThreePhaseSim:
             surface.blit(msg, (int(100 * self.scale), int(100 * self.scale)))
 
     def draw_controls_section(self, surface):
-        title = self.font_main.render("Justera Belastning", True, (150, 150, 150))
+        title = self.font_main.render("Justera belastning", True, (150, 150, 150))
         surface.blit(title, (self.w // 2 + int(20 * self.scale), int(20 * self.scale)))
         col1_x = self.sliders_delta[0].rect.x
         col2_x = self.sliders_y[0].rect.x
-        head1 = self.font_small.render("Huvudspänning (Delta)", True, (180, 180, 180))
+        head1 = self.font_small.render("Huvudspänning (\u0394)", True, (180, 180, 180))
         head2 = self.font_small.render("Fasspänning (Y)", True, (180, 180, 180))
         surface.blit(head1, (col1_x, int(60 * self.scale)))
         surface.blit(head2, (col2_x, int(60 * self.scale)))
