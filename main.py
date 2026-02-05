@@ -4,6 +4,7 @@ import sys
 import os
 import asyncio # KRÄVS FÖR WEBBEN
 import cmath
+import time # By AI agent Mima 2026-02-05 17:10:10
 
 # --- Färger ---
 COLOR_BG = (15, 15, 20)
@@ -78,9 +79,10 @@ class ThreePhaseSim:
     def __init__(self, width, height):
         self.time = 0.0
         self.paused = False
-        self.current_freq = INITIAL_FREQ # Current simulation frequency
-        self.max_freq = MAX_FREQ # Max simulation frequency
-        
+        self.current_freq = INITIAL_FREQ # Current simulation frequency # By AI agent Mima 2026-02-05 17:10:10
+        self.max_freq = MAX_FREQ # Max simulation frequency # By AI agent Mima 2026-02-05 17:10:10
+        self.last_update_time = time.time() # By AI agent Mima 2026-02-05 17:10:10
+
         self.base_w = 1200
         self.base_h = 800
         self.scale = 1.0
@@ -166,9 +168,14 @@ class ThreePhaseSim:
         self.stop_rect = pygame.Rect(w // 2 - btn_w // 2, h - int(60 * self.scale), btn_w, btn_h)
 
     def update(self, events):
+        current_time = time.time() # By AI agent Mima 2026-02-05 17:10:10
+        dt = current_time - self.last_update_time # By AI agent Mima 2026-02-05 17:10:10
+        self.last_update_time = current_time # By AI agent Mima 2026-02-05 17:10:10
+
         if not self.paused:
-            self.time += self.current_freq
-            self.current_freq = min(self.current_freq, self.max_freq)
+            # Update simulation speed using delta time # By AI agent Mima 2026-02-05 17:10:10
+            self.time += self.current_freq * dt # By AI agent Mima 2026-02-05 17:10:10
+            self.current_freq = min(self.current_freq, self.max_freq) # By AI agent Mima 2026-02-05 17:10:10
             
         mx, my = pygame.mouse.get_pos()
         for event in events:
