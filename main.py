@@ -20,7 +20,8 @@ COLOR_N  = (255, 255, 255) # Vit
 
 # Fysikparametrar
 VOLTAGE_RMS = 230.0
-FREQ = 0.02
+INITIAL_FREQ = 0.02
+MAX_FREQ = 0.1
 BASE_PIXELS_PER_AMP = 10.0 
 
 def resource_path(relative_path):
@@ -77,6 +78,8 @@ class ThreePhaseSim:
     def __init__(self, width, height):
         self.time = 0.0
         self.paused = False
+        self.current_freq = INITIAL_FREQ # Current simulation frequency
+        self.max_freq = MAX_FREQ # Max simulation frequency
         
         self.base_w = 1200
         self.base_h = 800
@@ -164,7 +167,8 @@ class ThreePhaseSim:
 
     def update(self, events):
         if not self.paused:
-            self.time += FREQ
+            self.time += self.current_freq
+            self.current_freq = min(self.current_freq, self.max_freq)
             
         mx, my = pygame.mouse.get_pos()
         for event in events:
