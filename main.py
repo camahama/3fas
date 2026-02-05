@@ -77,13 +77,31 @@ class Slider:
         knob_x = self.rect.x + int(self.rect.width * ratio)
         pygame.draw.circle(surface, (200, 200, 200), (knob_x, self.rect.centery), knob_radius)
         
-        # By AI agent Mima 2026-02-05 17:35:00: Render label with italic if is_italic is True
-        if self.is_italic:
-            # Pygame's SysFont doesn't support granular rich text. Apply italic to the whole label.
-            italic_font = pygame.font.SysFont("Arial", font.get_height(), italic=True) # By AI agent Mima 2026-02-05 17:34:00 
-            label_surf = italic_font.render(f"{self.label}: {int(self.val)} W", True, self.color)
+        # By AI agent Mima 2026-02-05 17:45:00: Custom rendering for italic 'P', subscripts, and em-dashes
+        # Attempt to use a font with good Unicode support, or fallback to Arial.
+        display_font = pygame.font.SysFont("Arial", font.get_height())
+
+        parts = self.label.split(' ', 1) # Split label into 'P' and the rest
+        if len(parts) > 1 and parts[0].startswith('P'):
+            # Render 'P' in italic
+            p_font = pygame.font.SysFont("Arial", font.get_height(), italic=True) # By AI agent Mima 2026-02-05 17:45:00
+            p_surf = p_font.render(parts[0], True, self.color) # By AI agent Mima 2026-02-05 17:45:00
+
+            # Render the rest of the label (with subscripts and em-dashes)
+            rest_label = f"{parts[1]}: {int(self.val)} W" # By AI agent Mima 2026-02-05 17:45:00
+            rest_surf = display_font.render(rest_label, True, self.color) # By AI agent Mima 2026-02-05 17:45:00
+            
+            # Combine surfaces
+            total_width = p_surf.get_width() + rest_surf.get_width() # By AI agent Mima 2026-02-05 17:45:00
+            total_height = max(p_surf.get_height(), rest_surf.get_height()) # By AI agent Mima 2026-02-05 17:45:00
+            combined_surf = pygame.Surface((total_width, total_height), pygame.SRCALPHA) # By AI agent Mima 2026-02-05 17:45:00
+            combined_surf.blit(p_surf, (0, (total_height - p_surf.get_height()) // 2)) # By AI agent Mima 2026-02-05 17:45:00
+            combined_surf.blit(rest_surf, (p_surf.get_width(), (total_height - rest_surf.get_height()) // 2)) # By AI agent Mima 2026-02-05 17:45:00
+            label_surf = combined_surf # By AI agent Mima 2026-02-05 17:45:00
         else:
-            label_surf = font.render(f"{self.label}: {int(self.val)} W", True, self.color)
+            # Fallback for labels that don't fit the 'P' pattern
+            label_surf = display_font.render(f"{self.label}: {int(self.val)} W", True, self.color) # By AI agent Mima 2026-02-05 17:45:00
+
         margin = max(5, int(self.rect.height * 0.5))
         surface.blit(label_surf, (self.rect.x, self.rect.y - label_surf.get_height() - margin))
 
