@@ -26,8 +26,8 @@ COLOR_P31_LABEL = (255, 165, 0) # Orange
 
 # Fysikparametrar
 VOLTAGE_RMS = 230.0
-INITIAL_FREQ = 0.02
-MAX_FREQ = 0.005
+INITIAL_FREQ = 1
+MAX_FREQ = 5
 BASE_PIXELS_PER_AMP = 10.0 
 
 def resource_path(relative_path):
