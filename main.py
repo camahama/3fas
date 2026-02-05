@@ -168,7 +168,7 @@ class ThreePhaseSim:
         self.pixels_per_amp = BASE_PIXELS_PER_AMP * self.scale
         
         main_font_size = max(12, int(18 * self.scale))
-        small_font_size = max(10, int(20 * self.scale)) # Reverted to original size for small font # By AI agent Mima 2026-02-05 19:07:00
+        small_font_size = max(10, int(20 * self.scale))
         heading_font_size = max(12, int(25 * self.scale)) # New font size for headings # By AI agent Mima 2026-02-05 19:07:00
 
         self.font_main = pygame.font.SysFont("Arial", main_font_size)
@@ -187,7 +187,7 @@ class ThreePhaseSim:
         area_width = w // 2 - int(40 * self.scale)
         col_width = (area_width - int(40 * self.scale)) // 2
         slider_h = int(10 * self.scale)
-        slider_start_y = int(120 * self.scale) # By AI agent Mima 2026-02-05 19:05:00
+        slider_start_y = int(140 * self.scale) # Increased spacing from headings # By AI agent Mima 2026-02-05 19:10:00
         gap = int(80 * self.scale)
         
         x_col1 = area_start_x
@@ -201,7 +201,7 @@ class ThreePhaseSim:
         btn_w = int(120 * self.scale)
         btn_h = int(40 * self.scale)
         self.reset_rect = pygame.Rect(x_col2, slider_start_y + 3 * gap, btn_w, btn_h)
-        self.stop_rect = pygame.Rect(w // 2 - btn_w // 2, h - int(60 * self.scale), btn_w, btn_h)
+        self.stop_rect = pygame.Rect(w // 2 - btn_w - int(20 * self.scale), h - int(60 * self.scale), btn_w, btn_h) # Moved left # By AI agent Mima 2026-02-05 19:25:00
 
     def update(self, events):
         current_time = time.time() # By AI agent Mima 2026-02-05 17:10:10
@@ -413,8 +413,8 @@ class ThreePhaseSim:
             if offset_y - height_scale <= y_pos <= offset_y + height_scale:
                 pygame.draw.line(surface, (80, 80, 80), (offset_x, y_pos), (offset_x + width, y_pos), 1)
                 txt_x = max(10, offset_x - int(45 * self.scale))
-                lbl = self.font_small.render(f"{amp}A", True, (255, 255, 255))
-                surface.blit(lbl, (txt_x, y_pos - int(8 * self.scale)))
+                lbl = self.font_small.render(f"{amp} A", True, (255, 255, 255)) # Right-adjusted with space before A # By AI agent Mima 2026-02-05 19:10:00
+                surface.blit(lbl, (txt_x - lbl.get_width(), y_pos - int(8 * self.scale))) # By AI agent Mima 2026-02-05 19:10:00
 
         colors = [COLOR_L1, COLOR_L2, COLOR_L3]
         points_lists = [[], [], [], []] 
