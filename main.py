@@ -19,6 +19,11 @@ COLOR_L2 = (50, 200, 50)   # Grön
 COLOR_L3 = (50, 100, 255)  # Blå
 COLOR_N  = (255, 255, 255) # Vit
 
+# By AI agent Mima 2026-02-05 17:30:00: New colors for specific labels
+COLOR_P12_LABEL = (255, 255, 0) # Yellow
+COLOR_P23_LABEL = (255, 0, 255) # Magenta
+COLOR_P31_LABEL = (255, 165, 0) # Orange
+
 # Fysikparametrar
 VOLTAGE_RMS = 230.0
 INITIAL_FREQ = 0.02
@@ -34,11 +39,12 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 class Slider:
-    def __init__(self, val_range, initial_val, label, color):
+    def __init__(self, val_range, initial_val, label, color, is_italic=False): # By AI agent Mima 2026-02-05 17:35:00
         self.min_val, self.max_val = val_range
         self.val = initial_val
         self.label = label
         self.color = color
+        self.is_italic = is_italic # By AI agent Mima 2026-02-05 17:35:00
         self.dragging = False
         self.rect = pygame.Rect(0, 0, 10, 10)
 
@@ -71,7 +77,13 @@ class Slider:
         knob_x = self.rect.x + int(self.rect.width * ratio)
         pygame.draw.circle(surface, (200, 200, 200), (knob_x, self.rect.centery), knob_radius)
         
-        label_surf = font.render(f"{self.label}: {int(self.val)} W", True, self.color)
+        # By AI agent Mima 2026-02-05 17:35:00: Render label with italic if is_italic is True
+        if self.is_italic:
+            # Pygame's SysFont doesn't support granular rich text. Apply italic to the whole label.
+            italic_font = pygame.font.SysFont(font.get_fontname(), font.get_height(), italic=True) 
+            label_surf = italic_font.render(f"{self.label}: {int(self.val)} W", True, self.color)
+        else:
+            label_surf = font.render(f"{self.label}: {int(self.val)} W", True, self.color)
         margin = max(5, int(self.rect.height * 0.5))
         surface.blit(label_surf, (self.rect.x, self.rect.y - label_surf.get_height() - margin))
 
@@ -107,16 +119,16 @@ class ThreePhaseSim:
         except Exception as e:
             print(f"Kunde inte ladda bild: {e}")
 
-        self.sliders_delta = [
-            Slider((0, 3000), 0, "P12 (L1-L2)", COLOR_L1),
-            Slider((0, 3000), 0, "P23 (L2-L3)", COLOR_L2),
-            Slider((0, 3000), 0, "P31 (L3-L1)", COLOR_L3)
+        self.sliders_delta = [ # By AI agent Mima 2026-02-05 17:40:00
+            Slider((0, 3000), 0, "P₁₂ (L₁—L₂)", COLOR_P12_LABEL, is_italic=True), # By AI agent Mima 2026-02-05 17:40:00
+            Slider((0, 3000), 0, "P₂₃ (L₂—L₃)", COLOR_P23_LABEL, is_italic=True), # By AI agent Mima 2026-02-05 17:40:00
+            Slider((0, 3000), 0, "P₃₁ (L₃—L₁)", COLOR_P31_LABEL, is_italic=True)  # By AI agent Mima 2026-02-05 17:40:00
         ]
         
-        self.sliders_y = [
-            Slider((0, 2000), 0, "P1 (L1-N)", COLOR_L1),
-            Slider((0, 2000), 0, "P2 (L2-N)", COLOR_L2),
-            Slider((0, 2000), 0, "P3 (L3-N)", COLOR_L3)
+        self.sliders_y = [ # By AI agent Mima 2026-02-05 17:40:00
+            Slider((0, 2000), 0, "P₁ (L₁—N)", COLOR_L1, is_italic=True), # By AI agent Mima 2026-02-05 17:40:00
+            Slider((0, 2000), 0, "P₂ (L₂—N)", COLOR_L2, is_italic=True), # By AI agent Mima 2026-02-05 17:40:00
+            Slider((0, 2000), 0, "P₃ (L₃—N)", COLOR_L3, is_italic=True)  # By AI agent Mima 2026-02-05 17:40:00
         ]
         
         self.reset_rect = pygame.Rect(0, 0, 100, 40)
