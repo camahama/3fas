@@ -485,5 +485,21 @@ frameborder="1"
 
     </script>
 
+    <script>
+        // En liten robot som väntar på startknappen
+        var autoClicker = setInterval(function() {
+            // OBS: Om din knapp hade ett annat ID än "button" i steg 3, ändra det här under!
+            var btn = document.getElementById("button");
+            
+            // Om knappen finns OCH den säger "Ready", klicka på den!
+            if (btn && btn.innerText.includes("Ready")) {
+                console.log("Auto-clicking start button...");
+                btn.click();
+                // Stäng av roboten så den inte klickar fler gånger
+                clearInterval(autoClicker);
+            }
+        }, 100); // Kollar var 100:e millisekund
+    </script>
+
 </body>
 </html>
