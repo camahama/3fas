@@ -164,20 +164,9 @@ async def custom_site():
         screen.blit(prompt, ( marginx+ ux(80), marginy - uy(10) ) )
         compose()
 
-    # test/wait if user media interaction required
-    if not platform.window.MM.UME:
-
-        # now make a prompt
-        fnt = pygame.sysfont.SysFont("freesans",  uy(80) )
-        prompt = fnt.render("Ready to start !", True, "blue")
-        pg_bar(track.len)
-        screen.blit(prompt, ( marginx+ ux(80), marginy - uy(10) ) )
-        compose()
-        print("""
-        * Waiting for media user engagement : please click/touch page *
-    """)
-        while not platform.window.MM.UME:
-            await asyncio.sleep(.1)
+    # --- BLOCK REMOVED: Auto-start enabled ---
+    # The code that waited for platform.window.MM.UME has been deleted here.
+    # -----------------------------------------
 
     # cleanup
     screen.fill( (0,0,0,0) )
@@ -237,7 +226,7 @@ config = {
     _sdl2 : "canvas",
     user_canvas : 0,
     user_canvas_managed : 0,
-    ume_block : 1,
+    ume_block : 0,  // CHANGED FROM 1 TO 0
     can_close : 0,
     archive : "3fas",
     gui_debug : 3,
@@ -483,33 +472,6 @@ frameborder="1"
         window.frames["iframe"].location = url;
     }
 
-    </script>
-
-    <script>
-        // En funktion som letar efter knappen var 0.5 sekund
-        var clickerInterval = setInterval(function() {
-            // Hämta ALLA knappar som finns på sidan just nu
-            var allButtons = document.getElementsByTagName("button");
-            
-            for (var i = 0; i < allButtons.length; i++) {
-                var btn = allButtons[i];
-                
-                // Kolla om knappens text innehåller "Ready"
-                if (btn.innerText.indexOf("Ready") !== -1) {
-                    console.log("Hittade startknappen! Klickar nu.");
-                    
-                    // Klicka på den
-                    btn.click();
-                    
-                    // Göm den direkt så vi slipper se den blinka till
-                    btn.style.display = 'none';
-                    
-                    // Stäng av sökandet så datorn får vila
-                    clearInterval(clickerInterval);
-                    break; 
-                }
-            }
-        }, 500); // Körs 2 gånger i sekunden
     </script>
 
 </body>
